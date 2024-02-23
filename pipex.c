@@ -56,8 +56,8 @@ int	main(int ac, char *av[], char **env)
         return(-1);
     else if (p_id2 == 0)
         child2_process(av, env, p_fd);
-    waiting_process(p_id, p_id2);
     close(p_fd[0]);
     close(p_fd[1]);
+    waiting_process(p_id, p_id2);
     return (0);
 }
