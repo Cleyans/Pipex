@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 15:42:00 by brclemen          #+#    #+#             */
-/*   Updated: 2024/01/27 17:45:10 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:41:47 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 5
+#  define BUFFER_SIZE 5
 # endif
 
 typedef struct s_list
@@ -50,7 +50,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strncmp( const char *s1, const char *s2, size_t n);
 char	*ft_strjoin_pipex(char const *s1, char const *s2);
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
@@ -78,7 +78,6 @@ int		ft_lstsize(t_list *lst);
 void	ft_lstclear(t_list **lst, void (*del)(void	*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
-
 // ft_printf
 
 void	ft_putnbr(int n, size_t *index);
@@ -92,19 +91,5 @@ void	ft_print_hex(unsigned long long nb, char format, size_t *index);
 void	ft_print_ptr(void *nb, size_t *index);
 int		nbdigit(int n);
 int		ft_printf(const char *str, ...);
-
-// gnl
-
-int	ft_index(const char *s, char c);
-unsigned int	ft_strlenn(const char *str);
-char	*get_next_line(int fd);
-char	*ft_strdupp(const char *s1);
-char	*ft_strjoinn(char *s1, char const *s2);
-char	*ft_read(int fd, char *reserve);
-char	*ft_extraire_ligne(char *reserve);
-char	*ft_ligne_suivante(char *reserve);
-char	*get_line(char *backup);
-char	*get_backup(char *backup);
-char	*read_line(char *backup, int fd);
 
 #endif

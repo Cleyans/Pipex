@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:38:05 by brclemen          #+#    #+#             */
-/*   Updated: 2023/10/23 11:31:27 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:12:27 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	**ft_split(char const *s, char c)
 			mots++;
 		}
 	}
+	
 	tab[mots] = NULL;
 	return (tab);
 }
