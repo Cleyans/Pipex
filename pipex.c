@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:56:01 by brclemen          #+#    #+#             */
-/*   Updated: 2024/02/23 14:02:58 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:11:17 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	child2_process(char *av[], char **env, int *p_fd)
 	int	fd;
 
 	fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd == -1)
+		exit(-1);
 	dup2(fd, 1);
 	dup2(p_fd[0], 0);
-	close(fd);
-	close(p_fd[0]);
 	close(p_fd[1]);
 	cmd_execute(env, av[3], fd);
 }
@@ -30,10 +30,13 @@ void	child_process(char *av[], char **env, int *p_fd)
 	int	fd;
 
 	fd = open(av[1], O_RDONLY, 0777);
+	if (fd == -1)
+	{
+		ft_printf("ERROR : The file doesn't exist !\n");
+		exit(-1);
+	}
 	dup2(fd, 0);
 	dup2(p_fd[1], 1);
-	close(fd);
-	close(p_fd[1]);
 	close(p_fd[0]);
 	cmd_execute(env, av[2], fd);
 }
@@ -48,6 +51,7 @@ void	ft_error_args(void)
 {
 	ft_putstr_fd("ERROR : Five args needed.\n", 1);
 }
+// [0] == READ [1] == WRITE
 
 int	main(int ac, char *av[], char **env)
 {

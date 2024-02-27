@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:32:20 by brclemen          #+#    #+#             */
-/*   Updated: 2024/02/23 14:43:16 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:59:47 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_free(char **str)
 
 void	error(void)
 {
-	perror("Erreur");
+	perror("Error");
 	exit(EXIT_FAILURE);
 }
 
