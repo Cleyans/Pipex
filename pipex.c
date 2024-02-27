@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:56:01 by brclemen          #+#    #+#             */
-/*   Updated: 2024/02/27 11:11:17 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:42:59 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	child2_process(char *av[], char **env, int *p_fd)
 void	child_process(char *av[], char **env, int *p_fd)
 {
 	int	fd;
+	int status;
 
 	fd = open(av[1], O_RDONLY, 0777);
 	if (fd == -1)
@@ -40,16 +41,30 @@ void	child_process(char *av[], char **env, int *p_fd)
 	close(p_fd[0]);
 	cmd_execute(env, av[2], fd);
 }
-
 void	waiting_process(pid_t id, pid_t id2)
 {
-	waitpid(id, NULL, 0);
-	waitpid(id2, NULL, 0);
+	int wait_return;
+	int wait_return2;
+
+	wait_return = waitpid(id, NULL, 0);
+	if (wait_return == -1)
+	{
+		perror("waitpid");
+		exit(wait_return);
+	}
+	wait_return2 = waitpid(id2, NULL, 0);
+	if (wait_return2 == -1)
+	{
+		perror("waitpid");
+		exit(wait_return2);
+	}
 }
 
-void	ft_error_args(void)
+void	not_enough_line(int *p_fd, pid_t id, pid_t id2)
 {
-	ft_putstr_fd("ERROR : Five args needed.\n", 1);
+    close(p_fd[0]);
+    close(p_fd[1]);
+	waiting_process(id, id2);
 }
 // [0] == READ [1] == WRITE
 
@@ -73,11 +88,9 @@ int	main(int ac, char *av[], char **env)
 			exit (-1);
 		else if (p_id2 == 0)
 			child2_process(av, env, p_fd);
-		close(p_fd[0]);
-		close(p_fd[1]);
-		waiting_process(p_id, p_id2);
+		not_enough_line(p_fd, p_id, p_id2);
 	}
 	else
-		ft_error_args();
+		error(1);
 	return (0);
 }

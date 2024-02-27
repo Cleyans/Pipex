@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:32:20 by brclemen          #+#    #+#             */
-/*   Updated: 2024/02/27 10:59:47 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:41:47 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,15 @@ void	ft_free(char **str)
 	free(str);
 }
 
-void	error(void)
+void	error(int status)
 {
-	perror("Error");
-	exit(EXIT_FAILURE);
+	if (status == 1)
+		ft_putstr_fd("ERROR : Five args needed.\n", 1);
+	else if (status == 0)
+	{
+		perror("Error");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	cmd_execute(char **env, char *cmd, int fd)
@@ -43,10 +48,10 @@ void	cmd_execute(char **env, char *cmd, int fd)
 	if (!cmd_exe)
 	{
 		ft_free(cmd_split);
-		error();
+		error(0);
 	}
 	if (execve(cmd_exe, cmd_split, env) == -1)
-		error();
+		error(0);
 }
 
 char	*search_path(char **env, char *cmd_split)
