@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:56:01 by brclemen          #+#    #+#             */
-/*   Updated: 2024/02/27 19:42:59 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:53:53 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	child2_process(char *av[], char **env, int *p_fd)
 
 	fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
+	{
+		ft_printf("ERROR : The file cannot the created !\n");
 		exit(-1);
+	}
 	dup2(fd, 1);
 	dup2(p_fd[0], 0);
 	close(p_fd[1]);
@@ -28,7 +31,7 @@ void	child2_process(char *av[], char **env, int *p_fd)
 void	child_process(char *av[], char **env, int *p_fd)
 {
 	int	fd;
-	int status;
+	int	status;
 
 	fd = open(av[1], O_RDONLY, 0777);
 	if (fd == -1)
@@ -41,29 +44,25 @@ void	child_process(char *av[], char **env, int *p_fd)
 	close(p_fd[0]);
 	cmd_execute(env, av[2], fd);
 }
+
 void	waiting_process(pid_t id, pid_t id2)
 {
-	int wait_return;
-	int wait_return2;
-
-	wait_return = waitpid(id, NULL, 0);
-	if (wait_return == -1)
+	if (waitpid(id, NULL, 0) == -1)
 	{
 		perror("waitpid");
-		exit(wait_return);
+		exit(-1);
 	}
-	wait_return2 = waitpid(id2, NULL, 0);
-	if (wait_return2 == -1)
+	if (waitpid(id2, NULL, 0) == -1)
 	{
 		perror("waitpid");
-		exit(wait_return2);
+		exit(-1);
 	}
 }
 
 void	not_enough_line(int *p_fd, pid_t id, pid_t id2)
 {
-    close(p_fd[0]);
-    close(p_fd[1]);
+	close(p_fd[0]);
+	close(p_fd[1]);
 	waiting_process(id, id2);
 }
 // [0] == READ [1] == WRITE
