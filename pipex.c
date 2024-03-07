@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:56:01 by brclemen          #+#    #+#             */
-/*   Updated: 2024/03/01 13:53:53 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:39:40 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	child2_process(char *av[], char **env, int *p_fd)
 	fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 	{
-		ft_printf("ERROR : The file cannot the created !\n");
+		perror("Error");
 		exit(-1);
 	}
 	dup2(fd, 1);
@@ -36,7 +36,7 @@ void	child_process(char *av[], char **env, int *p_fd)
 	fd = open(av[1], O_RDONLY, 0777);
 	if (fd == -1)
 	{
-		ft_printf("ERROR : The file doesn't exist !\n");
+		perror("Error");
 		exit(-1);
 	}
 	dup2(fd, 0);
@@ -49,12 +49,12 @@ void	waiting_process(pid_t id, pid_t id2)
 {
 	if (waitpid(id, NULL, 0) == -1)
 	{
-		perror("waitpid");
+		perror("Error");
 		exit(-1);
 	}
 	if (waitpid(id2, NULL, 0) == -1)
 	{
-		perror("waitpid");
+		perror("Error");
 		exit(-1);
 	}
 }
@@ -75,6 +75,8 @@ int	main(int ac, char *av[], char **env)
 
 	if (ac == 5)
 	{
+		if (*env == NULL)
+			perror("Error");
 		if (pipe(p_fd) == -1)
 			exit (-1);
 		p_id = fork();
