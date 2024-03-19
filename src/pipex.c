@@ -6,11 +6,11 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:56:01 by brclemen          #+#    #+#             */
-/*   Updated: 2024/03/07 15:39:40 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:18:54 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 void	child2_process(char *av[], char **env, int *p_fd)
 {
@@ -22,16 +22,15 @@ void	child2_process(char *av[], char **env, int *p_fd)
 		perror("Error");
 		exit(-1);
 	}
-	dup2(fd, 1);
-	dup2(p_fd[0], 0);
+	dup2(fd, STDOUT);
+	dup2(p_fd[0], STDIN);
 	close(p_fd[1]);
-	cmd_execute(env, av[3], fd);
+	cmd_execute(env, av[3]);
 }
 
 void	child_process(char *av[], char **env, int *p_fd)
 {
 	int	fd;
-	int	status;
 
 	fd = open(av[1], O_RDONLY, 0777);
 	if (fd == -1)
@@ -39,10 +38,10 @@ void	child_process(char *av[], char **env, int *p_fd)
 		perror("Error");
 		exit(-1);
 	}
-	dup2(fd, 0);
-	dup2(p_fd[1], 1);
+	dup2(fd, STDIN);
+	dup2(p_fd[1], STDOUT);
 	close(p_fd[0]);
-	cmd_execute(env, av[2], fd);
+	cmd_execute(env, av[2]);
 }
 
 void	waiting_process(pid_t id, pid_t id2)
@@ -76,7 +75,7 @@ int	main(int ac, char *av[], char **env)
 	if (ac == 5)
 	{
 		if (*env == NULL)
-			perror("Error");
+			ft_printf("Error : ENV empty.\n");
 		if (pipe(p_fd) == -1)
 			exit (-1);
 		p_id = fork();

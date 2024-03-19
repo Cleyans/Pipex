@@ -6,12 +6,15 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:35:26 by brclemen          #+#    #+#             */
-/*   Updated: 2024/03/01 13:56:27 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/03/19 22:56:41 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+# define STDOUT 1
+# define STDIN 0
 
 /*
 ************************************************
@@ -36,7 +39,7 @@
 void	waiting_process(pid_t id, pid_t id2);
 void	not_enough_line(int *p_fd, pid_t id, pid_t id2);
 void	child2_process(char *av[], char **env, int *p_fd);
-void	cmd_execute(char **env, char *cmd, int fd);
+void	cmd_execute(char **env, char *cmd);
 void	child_process(char *av[], char **env, int *p_fd);
 void	ft_free(char **str);
 void	error(int status);

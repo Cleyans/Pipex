@@ -1,11 +1,12 @@
 NAME := pipex
 
 CC := cc
+CFLAGS = -Wall -Wextra -Werror
 
-FT			= Libft
+FT			= include/Libft
 LIBFT		= $(FT)/libft.a
 
-SOURCE := pipex.c utils.c
+SOURCE := src/pipex.c src/utils.c
 OBJ 	= $(SOURCE:.c=.o)
 
 all: $(NAME)
@@ -17,13 +18,13 @@ $(LIBFT): $(FT)
 	$(MAKE) -C $(FT)
 	
 %.o: %.c
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+		rm -rf $(OBJ)
 
 fclean: clean
 		rm -rf $(NAME)
-		rm -rf $(OBJ)
 
 re: fclean all
 

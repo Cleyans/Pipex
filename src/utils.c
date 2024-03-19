@@ -6,11 +6,11 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:32:20 by brclemen          #+#    #+#             */
-/*   Updated: 2024/03/07 15:37:02 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/03/19 23:11:53 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 void	ft_free(char **str)
 {
@@ -36,7 +36,7 @@ void	error(int status)
 	}
 }
 
-void	cmd_execute(char **env, char *cmd, int fd)
+void	cmd_execute(char **env, char *cmd)
 {
 	char	**cmd_split;
 	char	*cmd_exe;
