@@ -3,8 +3,5 @@
 ```shell
 make
 
-it only takes 4 arguments.
-
 ./pipex infile cmd cmd outfile
-
 ```
