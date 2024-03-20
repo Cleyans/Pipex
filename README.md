@@ -1,4 +1,10 @@
 <h1>How to use</h1>
 
-```Make```
-```./pipex infile "cmd" "cmd" "outfile"```
+```shell
+make
+
+it only takes 4 arguments.
+
+./pipex infile cmd cmd outfile
+
+```
