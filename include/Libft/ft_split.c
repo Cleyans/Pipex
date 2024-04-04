@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:38:05 by brclemen          #+#    #+#             */
-/*   Updated: 2024/03/07 15:43:40 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/04/03 22:05:35 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	**ft_split(char const *s, char c)
 
 	mots = 0;
 	start = 0;
+	if (!(char *)s)
+		return (NULL);
 	tab = (char **)malloc(sizeof(char *) * (nbmots(s, c) + 1));
 	if (!tab)
 		return (NULL);

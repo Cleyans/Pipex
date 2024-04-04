@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:56:01 by brclemen          #+#    #+#             */
-/*   Updated: 2024/03/22 12:00:03 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:08:18 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	child2_process(char *av[], char **env, int *p_fd)
 	{
 		perror("Error");
 		close(p_fd[0]);
-		close(fd);
 		exit(-1);
 	}
 	dup2(fd, STDOUT);
@@ -42,7 +41,6 @@ void	child_process(char *av[], char **env, int *p_fd)
 	{
 		perror("Error");
 		close(p_fd[1]);
-		close(fd);
 		exit(-1);
 	}
 	dup2(fd, STDIN);
@@ -80,10 +78,8 @@ int	main(int ac, char *av[], char **env)
 	pid_t	p_id;
 	pid_t	p_id2;
 
-	if (ac == 5)
+	if (ac == 5 && verif_errors(av, env) == 0)
 	{
-		if (*env == NULL)
-			ft_printf("Error : ENV empty.\n");
 		if (pipe(p_fd) == -1)
 			exit (-1);
 		p_id = fork();

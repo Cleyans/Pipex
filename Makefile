@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 FT			= include/Libft
 LIBFT		= $(FT)/libft.a
 
-SOURCE := src/pipex.c src/utils.c
+SOURCE := src/pipex.c src/utils.c src/error.c
 OBJ 	= $(SOURCE:.c=.o)
 
 all: $(NAME)
