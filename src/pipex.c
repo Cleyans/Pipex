@@ -6,11 +6,13 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:56:01 by brclemen          #+#    #+#             */
-/*   Updated: 2024/04/04 12:08:18 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:41:20 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+
+// [0] == READ [1] == WRITE
 
 void	child2_process(char *av[], char **env, int *p_fd)
 {
@@ -70,7 +72,6 @@ void	not_enough_line(int *p_fd, pid_t id, pid_t id2)
 	close(p_fd[1]);
 	waiting_process(id, id2);
 }
-// [0] == READ [1] == WRITE
 
 int	main(int ac, char *av[], char **env)
 {

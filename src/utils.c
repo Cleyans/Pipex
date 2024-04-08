@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:32:20 by brclemen          #+#    #+#             */
-/*   Updated: 2024/04/04 12:00:26 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:28:27 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error(int status)
 {
 	if (status == 1)
 	{
-		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Error : command not found.\n", 2);
 		exit(-1);
 	}
 	else if (status == 0)
@@ -56,7 +56,6 @@ char	*search_path(char **env, char *cmd_split)
 	char		*cmd_join;
 
 	i = 0;
-	paths = NULL;
 	while (env[i] && ft_strnstr(env[i], "PATH", 4) == NULL)
 		i++;
 	paths = ft_split(env[i] + 5, ':');
