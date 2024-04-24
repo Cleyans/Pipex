@@ -1,56 +1,52 @@
-# Guide d'utilisation de pipex
-
-Ce guide explique comment utiliser le projet pipex pour exécuter des commandes shell à travers des pipes.
+# pipex User Guide
+This guide explains how to use the pipex project to execute shell commands through pipes.
 
 ## Installation
-
-1. Clonez le dépôt pipex depuis GitHub :
+1. Clone the pipex repository from GitHub:
 
     ```shell
-    git clone https://github.com/votre-utilisateur/pipex.git
+    git clone https://github.com/your-username/pipex.git
     ```
 
-2. Accédez au répertoire du projet :
+2. Navigate to the project directory:
 
     ```shell
     cd pipex
     ```
 
-3. Compilez le projet en exécutant la commande make :
+3. Compile the project by running the make command:
 
     ```shell
     make
     ```
 
-## Utilisation
+## Usage
+To use pipex, follow these steps:
 
-Pour utiliser pipex, suivez les étapes suivantes :
-
-1. Exécutez la commande suivante pour exécuter une commande shell à travers un pipe :
+1. Execute the following command to run a shell command through a pipe:
 
     ```shell
-    ./pipex fichier_in cmd1 cmd2 fichier_out
+    ./pipex input_file cmd1 cmd2 output_file
     ```
 
-    - `fichier_in` : le fichier d'entrée contenant les données à envoyer à la première commande.
-    - `cmd1` : la première commande à exécuter.
-    - `cmd2` : la deuxième commande à exécuter.
-    - `fichier_out` : le fichier de sortie où les résultats seront stockés.
+    - `input_file`: the input file containing the data to be sent to the first command.
+    - `cmd1`: the first command to be executed.
+    - `cmd2`: the second command to be executed.
+    - `output_file`: the output file where the results will be stored.
 
-2. Les résultats de la commande seront écrits dans le fichier de sortie spécifié.
+2. The command's results will be written to the specified output file.
 
-## Exemples
+## Examples
+Here are some examples of using pipex:
 
-Voici quelques exemples d'utilisation de pipex :
-
-- Pour exécuter la commande `ls -l | grep .txt` et enregistrer les résultats dans le fichier `resultats.txt`, utilisez la commande suivante :
+- To execute the command `ls -l | grep .txt` and save the results to the file `results.txt`, use the following command:
 
   ```shell
-  ./pipex fichier.txt "ls -l" "grep .txt" resultats.txt
+  ./pipex file.txt "ls -l" "grep .txt" results.txt
   ```
 
-- Pour exécuter la commande `cat fichier.txt | sort | uniq` et afficher les résultats à l'écran, utilisez la commande suivante :
+- To execute the command `cat file.txt | sort | uniq` and display the results on the screen, use the following command:
 
   ```shell
-  ./pipex fichier.txt "cat" "sort" "uniq"
+  ./pipex file.txt "cat" "sort" "uniq"
   ```
