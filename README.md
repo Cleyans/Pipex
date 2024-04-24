@@ -8,7 +8,7 @@ This guide explains how to use the pipex project to execute shell commands throu
 1. Clone the pipex repository from GitHub:
 
     ```shell
-    git clone https://github.com/your-username/pipex.git
+    git clone git@github.com:Cleyans/Pipex.git
     ```
 
 2. Navigate to the project directory:
