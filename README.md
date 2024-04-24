@@ -39,8 +39,8 @@ To use pipex, follow these steps:
 
 2. The command's results will be written to the specified output file.
 
-## Examples
-Here are some examples of using pipex:
+## Example
+Here are an example of using pipex:
 
 - To execute the command `ls -l | grep .txt` and save the results to the file `results.txt`, use the following command:
 
@@ -48,8 +48,3 @@ Here are some examples of using pipex:
   ./pipex file.txt "ls -l" "grep .txt" results.txt
   ```
 
-- To execute the command `cat file.txt | sort | uniq` and display the results on the screen, use the following command:
-
-  ```shell
-  ./pipex file.txt "cat" "sort" "uniq"
-  ```
