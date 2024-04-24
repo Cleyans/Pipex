@@ -1,5 +1,8 @@
-# pipex User Guide
+# Pipex User Guide
 This guide explains how to use the pipex project to execute shell commands through pipes.
+
+# What's Pipex
+The `pipex` project is a tool that allows you to execute shell commands using pipes.
 
 ## Installation
 1. Clone the pipex repository from GitHub:
