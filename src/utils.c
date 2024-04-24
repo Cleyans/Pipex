@@ -6,24 +6,26 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:32:20 by brclemen          #+#    #+#             */
-/*   Updated: 2024/04/08 17:28:27 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/04/24 06:50:40 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	error(int status)
+void	error(int status, char *cmd_error)
 {
 	if (status == 1)
 	{
-		ft_putstr_fd("Error : command not found.\n", 2);
+		ft_putstr_fd("Error: command not found: ", 2);
+		ft_putstr_fd(cmd_error, 2);
+		write(2, "\n", 1);
 		exit(-1);
 	}
-	else if (status == 0)
+	if (status == 0)
 	{
-		ft_putstr_fd("Error : command not found.\n", 2);
-		close(STDIN);
-		close(STDOUT);
+		ft_putstr_fd("Error: command not found: ", 2);
+		ft_putstr_fd(cmd_error, 2);
+		write(2, "\n", 1);
 		exit(-1);
 	}
 }
@@ -40,11 +42,11 @@ void	cmd_execute(char **env, char *cmd)
 	if (!cmd_exe)
 	{
 		ft_free(cmd_split);
-		error(0);
+		error(0, cmd);
 	}
 	if (execve(cmd_exe, cmd_split, env) == -1)
 	{
-		error(0);
+		error(0, cmd);
 	}
 }
 
@@ -60,7 +62,7 @@ char	*search_path(char **env, char *cmd_split)
 		i++;
 	paths = ft_split(env[i] + 5, ':');
 	i = 0;
-	while (paths[i] && verif_cmd(cmd_split) == 0)
+	while (paths[i])
 	{
 		cmd_join = ft_strjoin_pipex(paths[i], "/");
 		cmd_final = ft_strjoin_pipex(cmd_join, cmd_split);

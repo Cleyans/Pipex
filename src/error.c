@@ -6,7 +6,7 @@
 /*   By: brclemen <brclemen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:40:53 by brclemen          #+#    #+#             */
-/*   Updated: 2024/04/08 19:40:24 by brclemen         ###   ########.fr       */
+/*   Updated: 2024/04/24 06:50:23 by brclemen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,39 @@ int	only_space(char *cmd)
 	return (1);
 }
 
-int	verif_errors(char *av[], char **env)
+int	verif_cmd(char *cmd, char **env)
 {
-	if (!av[2] || !av[3])
-		return (1);
 	if ((!*env || ft_strcmp(env[0], "LD_LIBRARY_PATH=/usr/lib/debug") == 0)
-		&& (access(av[2], F_OK) == -1 || access(av[3], F_OK) == -1))
+		&& (access(cmd, F_OK) != 0))
 	{
-		ft_putstr_fd("Error : the env is empty and both of the \
-commands are not absolute paths.\n", 2);
-		exit(-1);
+		ft_putstr_fd("Error: Path cannot be found.\n", 2);
+		return (-1);
 	}
-	if (only_space(av[2]) == 1 || only_space(av[3]) == 1)
-		return (1);
+	if (cmd == NULL)
+	{
+		ft_putstr_fd("Error: command not found:", 2);
+		ft_putstr_fd(cmd, 2);
+		write(2, "\n", 1);
+		return (-1);
+	}
+	if (only_space(cmd) == 1)
+	{
+		ft_putstr_fd("Error: command not found: ", 2);
+		ft_putstr_fd(cmd, 2);
+		write(2, "\n", 1);
+		return (-1);
+	}
 	return (0);
 }
 
-int	verif_cmd(char *cmd_split)
+int	verif_errors(char *av[], char **env)
 {
-	if (cmd_split == NULL)
+	if ((!*env || ft_strcmp(env[0], "LD_LIBRARY_PATH=/usr/lib/debug") == 0)
+		&& (access(av[2], F_OK) != 0 && access(av[3], F_OK) != 0))
 	{
-		free(cmd_split);
-		return (-1);
+		ft_putstr_fd("Error : the env is empty and none of the \
+commands are absolute paths.\n", 2);
+		exit(-1);
 	}
 	return (0);
 }
